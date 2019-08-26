@@ -2,3 +2,6 @@
 /.vs/ASPNET_Core_2_1/v16/Server/sqlite3/storage.ide
 /.vs/ASPNET_Core_2_1/v16/Server/sqlite3/storage.ide-shm
 /.vs/ASPNET_Core_2_1/v16/Server/sqlite3/storage.ide-wal
+/.vs/ASPNET_Core_2_1/v16/.suo
+/ASPNET_Core_2_1/obj/
+

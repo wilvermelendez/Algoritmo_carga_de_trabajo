@@ -11,49 +11,51 @@
                     CARGA DE TRABAJO
                 </h1>
                 <div class="text-xl-center">
-                    <div class="col-lg-6">
-                        <div class="ibox float-e-margins">
-                            <div class="ibox-title">
-                                <h5>Parametros de entrada</h5>
-                            </div>
-                            <div class="ibox-content">
-                                <form>
-                                    <div class="form-group">
-                                        <label for="PorcentajeCapacidad">Porcentaje Capacidad Operarios</label>
-                                        <input type="text" class="form-control" id="porcentajeCapacidad" aria-describedby="capacidad" placeholder="Ingresar Porcentaje Capacidad Operarios">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="tiempoxTreabajo">Ingresar Tiempo por Trabajo:</label>
-                                        <input type="text" class="form-control" id="tiempoxTrabajo" placeholder="Ingrese Tiempo por Trabajo">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="SalarioxTrabajo">Ingresar Salario por Trabajo</label>
-                                        <input type="text" class="form-control" id="salarioxTrabajo" placeholder="Ingrese Salario por Trabajo">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Calcular</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="ibox ">
-                            <div class="ibox-title">
-                                <h5>
-                                    Line Chart Example
-                                    <small>With custom colors.</small>
-                                </h5>
-                                <div ibox-tools></div>
-                            </div>
-                            <div class="ibox-content">
-                                <div>
-                                    <canvas id="lineChart" height="140"></canvas>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <h5>Parametros de entrada</h5>
+                                </div>
+                                <div class="ibox-content">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="PorcentajeCapacidad">Porcentaje Capacidad Operarios</label>
+                                            <input type="text" class="form-control" id="porcentajeCapacidad" aria-describedby="capacidad" placeholder="Ingresar Porcentaje Capacidad Operarios">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tiempoxTreabajo">Ingresar Tiempo por Trabajo:</label>
+                                            <input type="text" class="form-control" id="tiempoxTrabajo" placeholder="Ingrese Tiempo por Trabajo">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="SalarioxTrabajo">Ingresar Salario por Trabajo</label>
+                                            <input type="text" class="form-control" id="salarioxTrabajo" placeholder="Ingrese Salario por Trabajo">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Calcular</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-lg-8">
+                            <div class="ibox ">
+                                <div class="ibox-title">
+                                    <h5>
+                                        Line Chart Example
+                                        <small>With custom colors.</small>
+                                    </h5>
+                                    <div ibox-tools></div>
+                                </div>
+                                <div class="ibox-content">
+                                    <div>
+                                        <canvas id="lineChart" height="140"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
                     </div>
+                    <small>Universidad Don Bosco</small>
                 </div>
-                <small>Universidad Don Bosco</small>
-            </div>
         </div>
     </div>
 </div>

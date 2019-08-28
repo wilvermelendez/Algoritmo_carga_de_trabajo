@@ -1,60 +1,146 @@
-{
-  "DatosGrafica": {
-    "meses": [
-      {
-        "id": "1",
-        "dato": 0
-      },
-      {
-        "id": "2",
-        "dato": 5
-      },
-      {
-        "id": "3",
-        "dato": 10
-      },
-      {
-        "id": "4",
-        "dato": 15
-      },
-      {
-        "id": "5",
-        "dato": 20
-      },
-      {
-        "id": "6",
-        "dato": 25
-      },
-      {
-        "id": "7",
-        "dato": 30
-      },
-      {
-        "id": "8",
-        "dato": 35
-      }
-    ],
-    "demanda": [
-      {
-        "id": "1",
-        "dato": 0
-      },
-      {
-        "id": "2",
-        "dato": 250
-      },
-      {
-        "id": "3",
-        "dato": 500
-      },
-      {
-        "id": "4",
-        "dato": 750
-      },
-      {
-        "id": "5",
-        "dato": 1000
-      }
-    ]
+[
+  {
+    "Month": 0,
+    "Quantity": 0
+  },
+  {
+    "Month": 1,
+    "Quantity": 4
+  },
+  {
+    "Month": 2,
+    "Quantity": 8
+  },
+  {
+    "Month": 3,
+    "Quantity": 16
+  },
+  {
+    "Month": 4,
+    "Quantity": 26
+  },
+  {
+    "Month": 5,
+    "Quantity": 38
+  },
+  {
+    "Month": 6,
+    "Quantity": 60
+  },
+  {
+    "Month": 7,
+    "Quantity": 95
+  },
+  {
+    "Month": 8,
+    "Quantity": 150
+  },
+  {
+    "Month": 9,
+    "Quantity": 250
+  },
+  {
+    "Month": 11,
+    "Quantity": 500
+  },
+  {
+    "Month": 12,
+    "Quantity": 850
+  },
+  {
+    "Month": 13,
+    "Quantity": 450
+  },
+  {
+    "Month": 14,
+    "Quantity": 475
+  },
+  {
+    "Month": 15,
+    "Quantity": 600
+  },
+  {
+    "Month": 16,
+    "Quantity": 550
+  },
+  {
+    "Month": 17,
+    "Quantity": 625
+  },
+  {
+    "Month": 18,
+    "Quantity": 580
+  },
+  {
+    "Month": 19,
+    "Quantity": 620
+  },
+  {
+    "Month": 20,
+    "Quantity": 550
+  },
+  {
+    "Month": 21,
+    "Quantity": 580
+  },
+  {
+    "Month": 22,
+    "Quantity": 645
+  },
+  {
+    "Month": 23,
+    "Quantity": 710
+  },
+  {
+    "Month": 24,
+    "Quantity": 840
+  },
+  {
+    "Month": 25,
+    "Quantity": 450
+  },
+  {
+    "Month": 26,
+    "Quantity": 580
+  },
+  {
+    "Month": 27,
+    "Quantity": 580
+  },
+  {
+    "Month": 28,
+    "Quantity": 595
+  },
+  {
+    "Month": 29,
+    "Quantity": 620
+  },
+  {
+    "Month": 30,
+    "Quantity": 580
+  },
+  {
+    "Month": 31,
+    "Quantity": 585
+  },
+  {
+    "Month": 32,
+    "Quantity": 610
+  },
+  {
+    "Month": 33,
+    "Quantity": 555
+  },
+  {
+    "Month": 34,
+    "Quantity": 580
+  },
+  {
+    "Month": 35,
+    "Quantity": 700
+  },
+  {
+    "Month": 36,
+    "Quantity": 820
   }
-}
+]

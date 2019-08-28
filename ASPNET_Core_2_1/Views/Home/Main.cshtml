@@ -39,23 +39,23 @@
                         <div class="col-lg-8">
                             <div class="ibox ">
                                 @*<div class="ibox-title">
-                                    <h5>
-                                        Trabajos 
-                                        <small>With custom colors.</small>
-                                    </h5>
-                                    <div ibox-tools></div>
-                                </div>*@   
-                            <div class="ibox-content">
+                                        <h5>
+                                            Trabajos
+                                            <small>With custom colors.</small>
+                                        </h5>
+                                        <div ibox-tools></div>
+                                    </div>*@
+                                <div class="ibox-content">
                                     <div>
                                         <canvas id="lineChart" height="140"></canvas>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        </div>
                     </div>
-                    <small>Universidad Don Bosco</small>
                 </div>
+                <small>Universidad Don Bosco</small>
+            </div>
         </div>
     </div>
 </div>
@@ -69,8 +69,8 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            
-            $.get(  'https://'+window.location.host+'/api/demand', function( data ) {
+
+            $.get(  'http://'+window.location.host+'/api/demand', function( data ) {
                 var lineData = {
                     labels: data.months,
                     datasets: [
@@ -83,14 +83,14 @@
                             pointBorderColor: "#fff",
                             fill: false,
                             data: data.quantities,
-                           
 
-                        }   
+
+                        }
                     ]
                 };
                 var lineOptions = {
                     responsive: true,
-                    
+
                 };
 
 
@@ -98,11 +98,11 @@
                 new Chart(ctx, { type: 'line', data: lineData, options: lineOptions });
                 console.log(data);
             });
-            
 
-           
 
-            
+
+
+
 
         });
     </script>

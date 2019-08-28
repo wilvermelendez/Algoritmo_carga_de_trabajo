@@ -31,6 +31,10 @@ namespace ASPNET_Core_2_1
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddTransient<IJsonService, JsonService>();
             services.AddTransient<IDemandService, DemandService>();
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +60,7 @@ namespace ASPNET_Core_2_1
                     name: "default",
                     template: "{controller=Home}/{action=Main}/{id?}");
             });
+            app.UseCors(options => options.AllowAnyOrigin());
         }
     }
 }

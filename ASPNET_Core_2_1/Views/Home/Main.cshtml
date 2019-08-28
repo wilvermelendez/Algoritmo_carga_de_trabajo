@@ -68,10 +68,11 @@
     </environment>
 
     <script type="text/javascript">
+
         $(document).ready(function () {
 
-            $.get(  'http://'+window.location.host+'/api/demand', function( data ) {
-                var lineData = {
+            $.get('https://' + window.location.host + '/api/demand', function (data) {
+                const lineData = {
                     labels: data.months,
                     datasets: [
 
@@ -88,16 +89,29 @@
                         }
                     ]
                 };
-                var lineOptions = {
+                const lineOptions = {
                     responsive: true,
 
                 };
 
 
-                var ctx = document.getElementById("lineChart").getContext("2d");
-                new Chart(ctx, { type: 'line', data: lineData, options: lineOptions });
-                console.log(data);
+                const ctx = document.getElementById("lineChart").getContext("2d");
+                const myNewChart=new Chart(ctx, { type: 'line', data: lineData, options: lineOptions });
+
+                $("#lineChart").click(
+                    function (evt) {
+                        const activePoints = myNewChart.getElementsAtEvent(evt);
+                        if (activePoints[0] != undefined) {
+                            const activeMonth=activePoints[0]["_index"];
+
+                            console.log(activeMonth);
+
+                            //llenar ela tabla acorde al indice seleccionado que corresponde al mes
+                        }
+                    }
+                );
             });
+
 
 
 

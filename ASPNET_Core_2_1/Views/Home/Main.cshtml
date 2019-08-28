@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Main";
+    ViewBag.Title = "Principal";
 }
 
 <div class="wrapper wrapper-content">
@@ -38,14 +38,14 @@
                         </div>
                         <div class="col-lg-8">
                             <div class="ibox ">
-                                <div class="ibox-title">
+                                @*<div class="ibox-title">
                                     <h5>
-                                        Line Chart Example
+                                        Trabajos 
                                         <small>With custom colors.</small>
                                     </h5>
                                     <div ibox-tools></div>
-                                </div>
-                                <div class="ibox-content">
+                                </div>*@   
+                            <div class="ibox-content">
                                     <div>
                                         <canvas id="lineChart" height="140"></canvas>
                                     </div>
@@ -76,17 +76,21 @@
                     datasets: [
 
                         {
-                            label: "Data 1",
+                            label: "Meses vs trabajos",
                             backgroundColor: 'rgba(26,179,148,0.5)',
                             borderColor: "rgba(26,179,148,0.7)",
                             pointBackgroundColor: "rgba(26,179,148,1)",
                             pointBorderColor: "#fff",
-                            data: data.quantities
+                            fill: false,
+                            data: data.quantities,
+                           
+
                         }   
                     ]
                 };
                 var lineOptions = {
-                    responsive: true
+                    responsive: true,
+                    
                 };
 
 

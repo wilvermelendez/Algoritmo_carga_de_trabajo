@@ -2,5 +2,6 @@
 {
     public class Probability
     {
+        public int totalSalaries { get; set; }
     }
 }

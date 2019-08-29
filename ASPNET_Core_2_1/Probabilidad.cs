@@ -19,7 +19,7 @@ namespace ASPNET_Core_2_1.Models
             decimal salarioTotal = 0;
             int cantidadOperarios = operarios.Count;
 
-            foreach(var operario in operarios)
+            foreach (var operario in this.operarios)
             {
                 salarioTotal += operario.Salary;
             }
@@ -49,6 +49,21 @@ namespace ASPNET_Core_2_1.Models
 
                 return (salario1 + salario2) / 2;
             }
+        }
+
+        public decimal varianza()
+        {
+            int cantidadOperarios = this.operarios.Count;
+            double sum = 0;
+            decimal op;
+
+            foreach(var operario in this.operarios)
+            {
+                op = operario.Salary - media();
+                sum = sum + Math.Pow(Convert.ToDouble(op), 2);
+            }
+
+            return Convert.ToDecimal(sum / (cantidadOperarios - 1));
         }
     }
 }

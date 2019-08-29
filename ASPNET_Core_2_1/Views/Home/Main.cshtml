@@ -71,7 +71,7 @@
 
         $(document).ready(function () {
 
-            $.get('https://' + window.location.host + '/api/demand', function (data) {
+            $.get('http://' + window.location.host + '/api/demand', function (data) {
                 const lineData = {
                     labels: data.months,
                     datasets: [

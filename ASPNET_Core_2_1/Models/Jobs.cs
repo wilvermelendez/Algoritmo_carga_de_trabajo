@@ -5,10 +5,9 @@
         public int Id { get; set; }
         public int Score { get; set; }
 
-        public Jobs(int id, int score)
+        public Jobs()
         {
-            id = Id;
-            score = Score;
+            
 
         }
 

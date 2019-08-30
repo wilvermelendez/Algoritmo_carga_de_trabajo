@@ -4,9 +4,16 @@ namespace ASPNET_Core_2_1.Models
 {
     public class Operator
     {
+        public Operator()
+        {
+            Fired = false;
+            Jobs = new List<Job>();
+            Penalties = new List<Penalty>();
+        }
         public Operator(int id)
         {
             id = Id;
+            Fired = false;
         }
 
         public int Id { get; set; }
@@ -17,5 +24,7 @@ namespace ASPNET_Core_2_1.Models
         public decimal Salary { get; set; }
         public decimal PenaltySalary { get; set; }
         public bool Fired { get; set; }
+
+
     }
 }

@@ -9,7 +9,7 @@ namespace ASPNET_Core_2_1.Models
     {
         private List<Operator> operarios;
 
-        Probabilidad(List<Operator> opeararios)
+        public Probabilidad(List<Operator> opeararios)
         {
             this.operarios = opeararios;
         }
@@ -24,7 +24,7 @@ namespace ASPNET_Core_2_1.Models
                 salarioTotal += operario.Salary;
             }
 
-            return salarioTotal / Convert.ToDecimal(cantidadOperarios);
+            return salarioTotal / cantidadOperarios;
         }
 
         public decimal mediana()
@@ -32,17 +32,22 @@ namespace ASPNET_Core_2_1.Models
             Operator operario1, operario2;
             int cantidadOperarios = operarios.Count;
             int mod = cantidadOperarios % 2;
+            decimal mid;
             decimal salario1, salario2;
+
+            List<Operator> sortedList = this.operarios.OrderBy(o => o.Salary).ToList();
 
             if (mod == 1)
             {
-                operario1 = this.operarios[mod + 1];
+                mid = (cantidadOperarios - 1) / 2;
+                operario1 = sortedList[(int)mid];
                 return operario1.Salary;
             }
             else
             {
-                operario1 = this.operarios[mod];
-                operario2 = this.operarios[mod + 1];
+                mid = (cantidadOperarios) / 2;
+                operario1 = sortedList[(int)mid];
+                operario2 = sortedList[(int)mid - 1];
 
                 salario1 = operario1.Salary;
                 salario2 = operario2.Salary;
@@ -55,15 +60,16 @@ namespace ASPNET_Core_2_1.Models
         {
             int cantidadOperarios = this.operarios.Count;
             double sum = 0;
-            decimal op;
+            decimal var;
 
             foreach(var operario in this.operarios)
             {
-                op = operario.Salary - media();
-                sum = sum + Math.Pow(Convert.ToDouble(op), 2);
+                sum = sum + Math.Pow(((double)operario.Salary - (double)media()), 2);
             }
 
-            return Convert.ToDecimal(sum / (cantidadOperarios - 1));
+            var = (decimal)sum / cantidadOperarios;
+
+            return var;
         }
     }
 }

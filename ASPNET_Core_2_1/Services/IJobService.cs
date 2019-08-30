@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace ASPNET_Core_2_1.Services
 {
-    public interface IDemandService
+    public interface IJobService
     {
-        List<Demand> GetDemands();
-        List<DemandDT> GetDemandsDT();
+        List<Job> AddJob(List<Job> jobs);
     }
 }

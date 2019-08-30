@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ASPNET_Core_2_1.Models
+﻿namespace ASPNET_Core_2_1.Models
 {
     public class Jobs
     {
@@ -11,11 +6,11 @@ namespace ASPNET_Core_2_1.Models
         public int Score { get; set; }
 
         public Jobs(int id, int score)
-            {
+        {
             id = Id;
             score = Score;
 
-            }
+        }
 
     }
 }

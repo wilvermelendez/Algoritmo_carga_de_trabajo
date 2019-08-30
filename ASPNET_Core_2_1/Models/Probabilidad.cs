@@ -1,27 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ASPNET_Core_2_1.Models
 {
     public class Probabilidad
     {
-        private List<Operator> operarios;
+        private List<Operator> _operators;
 
-        public Probabilidad(List<Operator> opeararios)
+        public Probabilidad(List<Operator> operators)
         {
-            this.operarios = opeararios;
+            _operators = operators;
         }
 
         public decimal media()
         {
             decimal salarioTotal = 0;
-            int cantidadOperarios = operarios.Count;
+            var cantidadOperarios = _operators.Count;
 
-            foreach (var operario in this.operarios)
+            foreach (var op in this._operators)
             {
-                salarioTotal += operario.Salary;
+                salarioTotal += op.Salary;
             }
 
             return salarioTotal / cantidadOperarios;
@@ -30,12 +29,12 @@ namespace ASPNET_Core_2_1.Models
         public decimal mediana()
         {
             Operator operario1, operario2;
-            int cantidadOperarios = operarios.Count;
-            int mod = cantidadOperarios % 2;
+            var cantidadOperarios = _operators.Count;
+            var mod = cantidadOperarios % 2;
             decimal mid;
             decimal salario1, salario2;
 
-            List<Operator> sortedList = this.operarios.OrderBy(o => o.Salary).ToList();
+            var sortedList = this._operators.OrderBy(o => o.Salary).ToList();
 
             if (mod == 1)
             {
@@ -58,17 +57,15 @@ namespace ASPNET_Core_2_1.Models
 
         public decimal varianza()
         {
-            int cantidadOperarios = this.operarios.Count;
+            var cantidadOperarios = this._operators.Count;
             double sum = 0;
             decimal var;
 
-            foreach(var operario in this.operarios)
+            foreach (var operario in this._operators)
             {
-                sum = sum + Math.Pow(((double)operario.Salary - (double)media()), 2);
+                sum += Math.Pow(((double)operario.Salary - (double)media()), 2);
             }
-
             var = (decimal)sum / cantidadOperarios;
-
             return var;
         }
     }

@@ -31,6 +31,10 @@ namespace ASPNET_Core_2_1
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddTransient<IJsonService, JsonService>();
             services.AddTransient<IDemandService, DemandService>();
+            services.AddTransient<IOperatorService, OperatorService>();
+            services.AddTransient<IJobService, JobService>();
+            services.AddTransient<IPenaltyService, PenaltyService>();
+            services.AddTransient<IWorkLoadService, WorkLoadService>();
             services.AddCors(c =>
             {
                 c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());

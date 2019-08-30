@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ASPNET_Core_2_1.Services;
 using Microsoft.AspNetCore.Mvc;
-using ASPNET_Core_2_1.Models;
 
 namespace ASPNET_Core_2_1.Controllers
 {
     public class HomeController : Controller
     {
+        public IWorkLoadService WorkLoadService { get; set; }
+
+        public HomeController(IWorkLoadService workLoadService)
+        {
+            WorkLoadService = workLoadService;
+        }
         public IActionResult Main()
         {
             return View();

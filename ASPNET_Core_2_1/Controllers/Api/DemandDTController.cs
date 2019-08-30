@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ASPNET_Core_2_1.Services;
+﻿using ASPNET_Core_2_1.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

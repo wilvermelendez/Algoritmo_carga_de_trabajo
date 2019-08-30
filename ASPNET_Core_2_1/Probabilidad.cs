@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ASPNET_Core_2_1.Models
 {
@@ -57,7 +55,7 @@ namespace ASPNET_Core_2_1.Models
             double sum = 0;
             decimal op;
 
-            foreach(var operario in this.operarios)
+            foreach (var operario in this.operarios)
             {
                 op = operario.Salary - media();
                 sum = sum + Math.Pow(Convert.ToDouble(op), 2);

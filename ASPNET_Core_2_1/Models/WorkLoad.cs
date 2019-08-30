@@ -1,7 +1,5 @@
-﻿using Microsoft.Ajax.Utilities;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Web.Helpers;
 
 namespace ASPNET_Core_2_1.Models
 {
@@ -11,5 +9,5 @@ namespace ASPNET_Core_2_1.Models
         public List<Operator> Operators { get; set; }
 
 
-   }
+    }
 }

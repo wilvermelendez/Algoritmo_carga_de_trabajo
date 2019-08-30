@@ -14,12 +14,12 @@ namespace ASPNET_Core_2_1.Services
 
         public List<WorkLoad> GetWorkLoads()
         {
-
+            return null;
         }
 
         public bool SaveWorkLoad()
         {
-
+            return true;
 
         }
     }

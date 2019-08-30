@@ -6,5 +6,6 @@ namespace ASPNET_Core_2_1.Services
     public interface IDemandService
     {
         List<Demand> GetDemands();
+        List<DemandDT> GetDemandsDT();
     }
 }

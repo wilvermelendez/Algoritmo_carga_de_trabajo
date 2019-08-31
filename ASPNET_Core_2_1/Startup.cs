@@ -34,6 +34,7 @@ namespace ASPNET_Core_2_1
             services.AddTransient<IOperatorService, OperatorService>();
             services.AddTransient<IJobService, JobService>();
             services.AddTransient<IPenaltyService, PenaltyService>();
+            services.AddTransient<IParameterService, ParameterService>();
             services.AddTransient<IWorkLoadService, WorkLoadService>();
             services.AddCors(c =>
             {

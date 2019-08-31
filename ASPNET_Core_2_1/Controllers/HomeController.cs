@@ -25,7 +25,6 @@ namespace ASPNET_Core_2_1.Controllers
 
         public IActionResult Minor()
         {
-
             return View();
         }
 

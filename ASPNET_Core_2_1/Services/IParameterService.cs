@@ -5,7 +5,7 @@ namespace ASPNET_Core_2_1.Services
 {
     public interface IParameterService
     {
-        bool SaveParameters(List<Parameter> parameter);
+        bool SaveParameters(Parameter parameter);
         List<Parameter> GetParameters();
     }
 }

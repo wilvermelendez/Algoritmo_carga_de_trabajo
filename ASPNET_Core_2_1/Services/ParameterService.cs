@@ -16,10 +16,11 @@ namespace ASPNET_Core_2_1.Services
             JsonService = jsonService;
         }
 
-        public bool SaveParameters(List<Parameter> parameter)
+        public bool SaveParameters(Parameter parameter)
         {
             //List<Parameter> parameters = new List<Parameter>();
-            JsonService.SaveJson<Parameter>(parameter, $"{Path.GetDirectoryName(System.IO.Path.GetFullPath("DatosGrafica.json"))}/Data/parametros.json");
+
+            JsonService.SaveJson<Parameter>(parameter, "/Data/parametros.json");
             return true;
         }
 

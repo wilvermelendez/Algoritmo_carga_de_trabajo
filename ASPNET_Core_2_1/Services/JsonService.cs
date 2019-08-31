@@ -28,7 +28,7 @@ namespace ASPNET_Core_2_1.Services
             return items;
 
         }
-
+        
         public bool SaveJson<T>(List<T> data, string path) where T : class
         {
             try
@@ -47,5 +47,21 @@ namespace ASPNET_Core_2_1.Services
             }
         }
 
+        public bool SaveJson<T>(T data, string path) where T : class
+        {
+            try
+            {
+                var json = JsonConvert.SerializeObject(data);
+                //write string to file
+                File.WriteAllText(path, string.Empty);
+                File.WriteAllText(path, json);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
     }
 }

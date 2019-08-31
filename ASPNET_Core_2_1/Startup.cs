@@ -34,6 +34,7 @@ namespace ASPNET_Core_2_1
             services.AddTransient<IOperatorService, OperatorService>();
             services.AddTransient<IJobService, JobService>();
             services.AddTransient<IPenaltyService, PenaltyService>();
+            services.AddTransient<IParameterService, ParameterService>();
             services.AddTransient<IWorkLoadService, WorkLoadService>();
             services.AddCors(c =>
             {
@@ -61,8 +62,8 @@ namespace ASPNET_Core_2_1
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Main}/{id?}");
+                    "default",
+                    "{controller=Home}/{action=Main}/{id?}");
             });
             app.UseCors(options => options.AllowAnyOrigin());
         }

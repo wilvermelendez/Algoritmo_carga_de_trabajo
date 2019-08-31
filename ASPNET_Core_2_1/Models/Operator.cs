@@ -9,6 +9,7 @@ namespace ASPNET_Core_2_1.Models
             Fired = false;
             Jobs = new List<Job>();
             Penalties = new List<Penalty>();
+            PenaltySalary = 0;
         }
       
 

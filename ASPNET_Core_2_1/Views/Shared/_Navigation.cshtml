@@ -5,12 +5,9 @@
                 <div class="dropdown profile-element">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="block m-t-xs font-bold">Usuario</span>
-                        <span class="text-muted text-xs block">General @*<b class="caret"></b>*@</span>
+                        <span class="text-muted text-xs block">General</span>
                     </a>
-                    @*<ul class="dropdown-menu animated fadeInRight m-t-xs" style="position: absolute; top: 91px; left: 0px; will-change: top, left;">
-                        <li><a class="dropdown-item" href="#">Logout</a></li>
-                    </ul>*@
-                </div>
+                    </div>
                 <div class="logo-element">
                     IN+
                 </div>
@@ -19,7 +16,7 @@
                 <a href="@Url.Action("Main", "Home")"><i class="fa fa-diamond"></i> <span class="nav-label">Principal</span> <span class="label label-primary float-right">Principal</span></a>
             </li>
             <li class="@Html.IsSelected(controller: "Home", action: "Minor")">
-                <a href="@Url.Action("Minor", "Home")"><i class="fa fa-server"></i> <span class="nav-label">Secundario</span></a>
+                <a href="@Url.Action("Minor", "Home")"><i class="fa fa-server"></i> <span class="nav-label">Reporte operarios</span></a>
             </li>
         </ul>
     </div>

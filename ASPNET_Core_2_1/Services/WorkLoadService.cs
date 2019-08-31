@@ -1,6 +1,7 @@
 ﻿using ASPNET_Core_2_1.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace ASPNET_Core_2_1.Services
 {
@@ -27,11 +28,14 @@ namespace ASPNET_Core_2_1.Services
             var workLoad = new List<WorkLoad>();
 
             //TODO move to right place and get from the configuration of the main page
+            //Parametros para el calculo de trabajos de operador por Mes
             const double hoursPerJob = 2.0;
             const double hoursPerDay = 8.0;
             var daysWorkPerMonth = 20;
+            //calculo de trabajos de operadores por mes
             var worksPerDay = Convert.ToInt32(Math.Floor(hoursPerDay / hoursPerJob));
             var maxNumberJobsPerOperatorInMonth = worksPerDay * daysWorkPerMonth;
+            //obtenemos la demanda acorde al origen de los datos
             var demandData = DemandService.GetDemands();
 
             foreach (var demand in demandData)
@@ -47,7 +51,9 @@ namespace ASPNET_Core_2_1.Services
                     new WorkLoad
                     {
                         Month = demand.Month,
-                        Operators = operators
+                        Operators = operators,
+                        Demand = demand.Quantity,
+                        JobsPerMontPerOperator = maxNumberJobsPerOperatorInMonth
                     }
                 );
 
@@ -70,15 +76,21 @@ namespace ASPNET_Core_2_1.Services
             return workLoad;
         }
 
-        public List<WorkLoad> GetWorkLoads()
-        {
-            return null;
-        }
+        public List<WorkLoad> GetWorkLoads() => JsonService.LoadJson<WorkLoad>($"{Path.GetDirectoryName(System.IO.Path.GetFullPath("WorkLoad.json"))}/Data/WorkLoad.json");
 
-        public bool SaveWorkLoad()
+        public bool SaveWorkLoad(List<WorkLoad> workLoads)
         {
-            return true;
 
+            try
+            {
+                JsonService.SaveJson<WorkLoad>(workLoads, "/Data/WorkLoad.json");
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
         }
 
 

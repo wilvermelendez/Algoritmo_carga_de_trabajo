@@ -31,7 +31,10 @@
                                             <label for="SalarioxTrabajo">Ingresar Salario por Trabajo</label>
                                             <input type="text" class="form-control" id="salarioxTrabajo" placeholder="Ingrese Salario por Trabajo">
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Calcular</button>
+                                        <div class="form-group">
+                                            <label for="target" id="target">Ingresar Salario por Trabajo</label>
+                                        </div>
+                                        <button type="button" class="btn btn-primary">Calcular</button>
                                     </form>
                                 </div>
                             </div>
@@ -103,6 +106,28 @@
         <script src="~/lib/dataTables/dataTables.bootstrap4.min.js"></script>
     </environment>
     <script type="text/javascript">
+                $("#calc").click(function() {
+            send();
+        });
+        function send() {
+        var datosIniciales = {
+            porcentajeCapacidad: $("#porcentajeCapacidad").val(),
+            tiempoxTrabajo:$("#tiempoxTrabajo").val(),
+            salarioxTrabajo:$("#salarioxTrabajo").val()
+        }
+
+        $('#target').html('calculando..');
+
+        $.ajax({
+            url: 'https://' + window.location.host + '/api/parameter',
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                $('#target').html(data.msg);
+            },
+            data: datosIniciales
+        });
+        }
         $(document).ready(function () {
 
             var table=$('#data-table').DataTable({

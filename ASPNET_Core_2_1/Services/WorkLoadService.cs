@@ -12,15 +12,17 @@ namespace ASPNET_Core_2_1.Services
         public IOperatorService OperatorService { get; set; }
         public IJobService JobService { get; set; }
         public IPenaltyService PenaltyService { get; set; }
+        public IParameterService ParameterService { get; set; }
 
 
 
-        public WorkLoadService(IJsonService jsonService, IDemandService demandService, IOperatorService operatorService, IJobService jobService, IPenaltyService penaltyService)
+        public WorkLoadService(IJsonService jsonService, IDemandService demandService, IOperatorService operatorService, IJobService jobService, IPenaltyService penaltyService, IParameterService parameterService)
         {
             JsonService = jsonService;
             DemandService = demandService;
             OperatorService = operatorService;
             JobService = jobService;
+            ParameterService = parameterService;
         }
 
         public List<WorkLoad> GenerateWorkLoads()
@@ -29,8 +31,9 @@ namespace ASPNET_Core_2_1.Services
 
             //TODO move to right place and get from the configuration of the main page
             //Parametros para el calculo de trabajos de operador por Mes
-            const double hoursPerJob = 2.0;
-            const double hoursPerDay = 8.0;
+            var parameter = ParameterService.GetParameters();
+            var hoursPerJob = double.Parse(parameter.tiempoxTrabajo.ToString());
+            var hoursPerDay = double.Parse(parameter.tiempoxTrabajo.ToString())*8;
             var daysWorkPerMonth = 20;
             //calculo de trabajos de operadores por mes
             var worksPerDay = Convert.ToInt32(Math.Floor(hoursPerDay / hoursPerJob));
@@ -76,7 +79,7 @@ namespace ASPNET_Core_2_1.Services
             return workLoad;
         }
 
-        public List<WorkLoad> GetWorkLoads() => JsonService.LoadJson<WorkLoad>($"{Path.GetDirectoryName(System.IO.Path.GetFullPath("WorkLoad.json"))}/Data/WorkLoad.json");
+        public List<WorkLoad> GetWorkLoads() => JsonService.LoadJson<WorkLoad>("/Data/WorkLoad.json");
 
         public bool SaveWorkLoad(List<WorkLoad> workLoads)
         {

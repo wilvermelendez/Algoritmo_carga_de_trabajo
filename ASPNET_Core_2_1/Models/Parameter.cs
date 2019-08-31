@@ -7,10 +7,10 @@ namespace ASPNET_Core_2_1.Models
 {
     public class Parameter
     {
-        public int Id { get; set; }
-        public int HoursPerJobs { get; set; }
-        public int PricePerJob { get; set; }
-        public int Percentage { get; set; }
+       // public int Id { get; set; }
+        public int porcentajeCapacidad { get; set; }
+        public int tiempoxTrabajo { get; set; }
+        public int salarioxTrabajo { get; set; }
 
     }
 }

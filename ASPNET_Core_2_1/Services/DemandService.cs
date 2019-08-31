@@ -13,7 +13,7 @@ namespace ASPNET_Core_2_1.Services
             JsonService = jsonService;
         }
 
-        public List<Demand> GetDemands() => JsonService.LoadJson<Demand>($"{Path.GetDirectoryName(System.IO.Path.GetFullPath("DatosGrafica.json"))}/Data/DatosGrafica.json");
-        public List<DemandDT> GetDemandsDT() => JsonService.LoadJson<DemandDT>($"{Path.GetDirectoryName(System.IO.Path.GetFullPath("LlenarDT.json"))}/Data/LlenarDT.json");
+        public List<Demand> GetDemands() => JsonService.LoadJson<Demand>("/Data/DatosGrafica.json");
+        public List<DemandDT> GetDemandsDT() => JsonService.LoadJson<DemandDT>("/Data/LlenarDT.json");
     }
 }

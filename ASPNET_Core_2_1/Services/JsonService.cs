@@ -13,10 +13,34 @@ namespace ASPNET_Core_2_1.Services
 
             try
             {
+                path = Path.GetDirectoryName(Path.GetFullPath("DatosGrafica.json")) + path;
                 using (var r = new StreamReader(path))
                 {
                     var json = r.ReadToEnd();
                     items = JsonConvert.DeserializeObject<List<T>>(json);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            return items;
+
+        }
+
+        public T LoadSingleJson<T>(string path) where T : class
+        {
+            T items;
+
+            try
+            {
+                path = Path.GetDirectoryName(Path.GetFullPath("DatosGrafica.json")) + path;
+                using (var r = new StreamReader(path))
+                {
+                    var json = r.ReadToEnd();
+                    items = JsonConvert.DeserializeObject<T>(json);
                 }
             }
             catch (Exception e)
@@ -47,5 +71,22 @@ namespace ASPNET_Core_2_1.Services
             }
         }
 
+        public bool SaveJson<T>(T data, string path) where T : class
+        {
+            try
+            {
+                path = Path.GetDirectoryName(Path.GetFullPath("DatosGrafica.json")) + path;
+                var json = JsonConvert.SerializeObject(data);
+                //write string to file
+                File.WriteAllText(path, string.Empty);
+                File.WriteAllText(path, json);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
     }
 }

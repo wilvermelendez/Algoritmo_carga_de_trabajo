@@ -138,7 +138,7 @@
 
 
 
-            $.get('https://' + window.location.host + '/api/demand', function (data) {
+            $.get('http://' + window.location.host + '/api/demand', function (data) {
                 const lineData = {
                     labels: data.months,
                     datasets: [
@@ -171,7 +171,7 @@
                             const activeMonth = activePoints[0]["_index"];
 
                             console.log(activeMonth);
-                            $.get('https://' + window.location.host + '/api/workload/' + activeMonth, function (datasource) {
+                            $.get('http://' + window.location.host + '/api/workload/' + activeMonth, function (datasource) {
                                 var dataitems = [];
                                 table.rows().remove().draw();
                                 

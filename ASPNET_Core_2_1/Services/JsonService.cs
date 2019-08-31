@@ -13,6 +13,7 @@ namespace ASPNET_Core_2_1.Services
 
             try
             {
+                path = Path.GetDirectoryName(Path.GetFullPath("DatosGrafica.json")) + path;
                 using (var r = new StreamReader(path))
                 {
                     var json = r.ReadToEnd();
@@ -28,7 +29,30 @@ namespace ASPNET_Core_2_1.Services
             return items;
 
         }
-        
+
+        public T LoadSingleJson<T>(string path) where T : class
+        {
+            T items;
+
+            try
+            {
+                path = Path.GetDirectoryName(Path.GetFullPath("DatosGrafica.json")) + path;
+                using (var r = new StreamReader(path))
+                {
+                    var json = r.ReadToEnd();
+                    items = JsonConvert.DeserializeObject<T>(json);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            return items;
+
+        }
+
         public bool SaveJson<T>(List<T> data, string path) where T : class
         {
             try

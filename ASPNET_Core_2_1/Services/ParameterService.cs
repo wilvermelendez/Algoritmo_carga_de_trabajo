@@ -20,15 +20,12 @@ namespace ASPNET_Core_2_1.Services
         {
             //List<Parameter> parameters = new List<Parameter>();
 
-            JsonService.SaveJson<Parameter>(parameter, "/Data/parametros.json");
+            JsonService.SaveJson<Parameter>(parameter, "/Data/Parametros.json");
             return true;
         }
 
-        public List<Parameter> GetParameters()
-        {
-
-            return null;
-        }
+        public Parameter GetParameters() => JsonService.LoadSingleJson<Parameter>("/Data/Parametros.json");
+        
 
     }
 }

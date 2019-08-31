@@ -106,43 +106,44 @@
     </environment>
     <script type="text/javascript">
 
-        //Almacenando parametros
-        function send() {
-            var datosIniciales = {
-                porcentajeCapacidad: $("#porcentajeCapacidad").val(),
-                tiempoxTrabajo: $("#tiempoxTrabajo").val(),
-                salarioxTrabajo: $("#salarioxTrabajo").val()
-            }
+       
 
-            $('#target').html('calculando..');
-
-            $.ajax({
-                url: 'https://' + window.location.host + '/api/parameter',
-                contentType: "application/json; charset=utf-8",
-                type: 'POST',
-                dataType: 'json',
-                data:  datosIniciales,
-                success: function (data) {
-                    $('#target').html(data.msg);
+        $(document).ready(function() {
+            //asignando elemento click para guardar parametros
+            $("#calc").click(function() {
+                var datosIniciales = {
+                    "porcentajeCapacidad": $("#porcentajeCapacidad").val(),
+                    "tiempoxTrabajo": $("#tiempoxTrabajo").val(),
+                    "salarioxTrabajo": $("#salarioxTrabajo").val()
                 }
+
+                $('#target').html('calculando..');
+                var parameters = JSON.stringify(datosIniciales);
+                $.post( 'http://' + window.location.host + '/api/parameter', function( parameters ){
+                    $('#target').html(data.msg);
+                })
+                .done(function() {
+                    alert( "second success" );
+                })
+                .fail(function(error) {
+                    console.log(error);
+                });
                 
             });
-        }
-        $(document).ready(function () {
-            //asignando elemento click para guardar parametros
-            $("#calc").click(function () {
-                send();
+            $.get('http://' + window.location.host + '/api/parameter', function(data) {
+                $("#porcentajeCapacidad").val(data.data.porcentajeCapacidad);
+                $("#tiempoxTrabajo").val(data.data.tiempoxTrabajo);
+                $("#salarioxTrabajo").val(data.data.salarioxTrabajo);
             });
-
             //creando tabla de datos
             var table = $('#data-table').DataTable({
                 data: [],
                 columns: [
                     { title: "Operador" },
-                    { title: "Month" },
-                    { title: "Jobs" },
+                    { title: "Mes" },
+                    { title: "Cantidad de trabajos" },
                     { title: "Salario" },
-                    { title: "PenaltySalary" }
+                    { title: "Trabajos penalizados" }
                 ],
                 pageLength: 10,
                 dom: '<"html5buttons"B>lTfgitp',
@@ -151,10 +152,9 @@
                     { extend: 'csv' },
                     { extend: 'excel', title: 'Tabla Excel' },
                     { extend: 'pdf', title: 'Tabla PDF' },
-
                     {
                         extend: 'print',
-                        customize: function (win) {
+                        customize: function(win) {
                             $(win.document.body).addClass('white-bg');
                             $(win.document.body).css('font-size', '10px');
 
@@ -168,63 +168,66 @@
 
 
             //obteniendo los datos para la gráfica
-            $.get('https://' + window.location.host + '/api/demand', function (data) {
-                const lineData = {
-                    labels: data.months,
-                    datasets: [
-                        {
-                            label: "Meses vs trabajos",
-                            backgroundColor: 'rgba(26,179,148,0.5)',
-                            borderColor: "rgba(26,179,148,0.7)",
-                            pointBackgroundColor: "rgba(26,179,148,1)",
-                            pointBorderColor: "#fff",
-                            fill: false,
-                            data: data.quantities,
+            $.get('http://' + window.location.host + '/api/demand',
+                function(data) {
+                    const lineData = {
+                        labels: data.months,
+                        datasets: [
+                            {
+                                label: "Meses vs trabajos",
+                                backgroundColor: 'rgba(26,179,148,0.5)',
+                                borderColor: "rgba(26,179,148,0.7)",
+                                pointBackgroundColor: "rgba(26,179,148,1)",
+                                pointBorderColor: "#fff",
+                                fill: false,
+                                data: data.quantities,
 
 
+                            }
+                        ]
+                    };
+                    const lineOptions = {
+                        responsive: true,
+
+                    };
+
+
+                    const ctx = document.getElementById("lineChart").getContext("2d");
+                    const myNewChart = new Chart(ctx, { type: 'line', data: lineData, options: lineOptions });
+                    //cuando se le dé click a la grafica se ejecuta la acción
+                    $("#lineChart").click(
+                        function(evt) {
+                            const activePoints = myNewChart.getElementsAtEvent(evt);
+                            //si el click es un punto de la grafica se carga la tabla de los operadores por el mes
+                            if (activePoints[0] != undefined) {
+                                const activeMonth = activePoints[0]["_index"];
+
+                                //Request para obtener la lista de datos acorde al mes seleccionado 
+                                $.get('http://' + window.location.host + '/api/workload/' + activeMonth,
+                                    function(datasource) {
+                                        var dataitems = [];
+                                        //vaciar y llenar tabla de datos
+                                        table.rows().remove().draw();
+
+                                        $.each(datasource.data,
+                                            function(i, item) {
+                                                const data = [];
+                                                data.push(item.id);
+                                                data.push(datasource.month);
+                                                data.push(item.jobs.length);
+                                                data.push(item.jobs.length * 10);
+                                                data.push(item.penaltySalary);
+                                                dataitems.push(data);
+                                            });
+                                        table.rows.add(dataitems).draw();
+
+
+                                    });
+
+                            }
                         }
-                    ]
-                };
-                const lineOptions = {
-                    responsive: true,
-
-                };
-
-
-                const ctx = document.getElementById("lineChart").getContext("2d");
-                const myNewChart = new Chart(ctx, { type: 'line', data: lineData, options: lineOptions });
-                //cuando se le dé click a la grafica se ejecuta la acción
-                $("#lineChart").click(
-                    function (evt) {
-                        const activePoints = myNewChart.getElementsAtEvent(evt);
-                        //si el click es un punto de la grafica se carga la tabla de los operadores por el mes
-                        if (activePoints[0] != undefined) {
-                            const activeMonth = activePoints[0]["_index"];
-
-                            //Request para obtener la lista de datos acorde al mes seleccionado 
-                            $.get('https://' + window.location.host + '/api/workload/' + activeMonth, function (datasource) {
-                                var dataitems = [];
-                                //vaciar y llenar tabla de datos
-                                table.rows().remove().draw();
-
-                                $.each(datasource.data, function (i, item) {
-                                    const data = [];
-                                    data.push(item.id);
-                                    data.push(datasource.month);
-                                    data.push(item.jobs.length);
-                                    data.push(item.jobs.length * 10);
-                                    data.push(item.penaltySalary);
-                                    dataitems.push(data);
-                                });
-                                table.rows.add(dataitems).draw();
-
-
-                            });
-
-                        }
-                    }
-                );
-            });
+                    );
+                });
 
         });
     </script>

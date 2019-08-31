@@ -21,20 +21,20 @@
                                     <form>
                                         <div class="form-group">
                                             <label for="PorcentajeCapacidad">Porcentaje Capacidad Operarios</label>
-                                            <input type="text" class="form-control" id="porcentajeCapacidad" aria-describedby="capacidad" placeholder="Ingresar Porcentaje Capacidad Operarios">
+                                            <input type="text" class="form-control" id="porcentajeCapacidad" aria-describedby="capacidad" placeholder="%">
                                         </div>
                                         <div class="form-group">
                                             <label for="tiempoxTreabajo">Ingresar Tiempo por Trabajo:</label>
-                                            <input type="text" class="form-control" id="tiempoxTrabajo" placeholder="Ingrese Tiempo por Trabajo">
+                                            <input type="text" class="form-control" id="tiempoxTrabajo" placeholder="">
                                         </div>
                                         <div class="form-group">
                                             <label for="SalarioxTrabajo">Ingresar Salario por Trabajo</label>
-                                            <input type="text" class="form-control" id="salarioxTrabajo" placeholder="Ingrese Salario por Trabajo">
+                                            <input type="text" class="form-control" id="salarioxTrabajo" placeholder="">
                                         </div>
                                         <div class="form-group">
-                                            <label for="target" id="target">Ingresar Salario por Trabajo</label>
+                                            <label for="target" id="target"></label>
                                         </div>
-                                        <button type="button" class="btn btn-primary">Calcular</button>
+                                        <button type="button" id="calc" class="btn btn-primary">Calcular</button>
                                     </form>
                                 </div>
                             </div>
@@ -78,8 +78,7 @@
                         </div>
                         <div class="ibox-content">
 
-                            <table id="data-table" class="table table-striped table-bordered table-hover dataTables-example">
-                            </table>
+                            <table id="data-table" class="table table-striped table-bordered table-hover dataTables-example"></table>
 
                         </div>
                         <small>Universidad Don Bosco</small>
@@ -106,31 +105,33 @@
         <script src="~/lib/dataTables/dataTables.bootstrap4.min.js"></script>
     </environment>
     <script type="text/javascript">
-                $("#calc").click(function() {
-            send();
-        });
+
         function send() {
-        var datosIniciales = {
-            porcentajeCapacidad: $("#porcentajeCapacidad").val(),
-            tiempoxTrabajo:$("#tiempoxTrabajo").val(),
-            salarioxTrabajo:$("#salarioxTrabajo").val()
-        }
+            var datosIniciales = {
+                porcentajeCapacidad: $("#porcentajeCapacidad").val(),
+                tiempoxTrabajo: $("#tiempoxTrabajo").val(),
+                salarioxTrabajo: $("#salarioxTrabajo").val()
+            }
 
-        $('#target').html('calculando..');
+            $('#target').html('calculando..');
 
-        $.ajax({
-            url: 'https://' + window.location.host + '/api/parameter',
-            type: 'get',
-            dataType: 'json',
-            success: function (data) {
-                $('#target').html(data.msg);
-            },
-            data: datosIniciales
-        });
+            $.ajax({
+                url: 'https://' + window.location.host + '/api/parameter',
+                contentType: "application/json; charset=utf-8",
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    $('#target').html(data.msg);
+                },
+                data: datosIniciales
+            });
         }
         $(document).ready(function () {
+            $("#calc").click(function () {
+                send();
+            });
 
-            var table=$('#data-table').DataTable({
+            var table = $('#data-table').DataTable({
                 data: [],
                 columns: [
                     { title: "Operador" },
@@ -163,7 +164,7 @@
 
 
 
-            $.get('http://' + window.location.host + '/api/demand', function (data) {
+            $.get('https://' + window.location.host + '/api/demand', function (data) {
                 const lineData = {
                     labels: data.months,
                     datasets: [
@@ -196,23 +197,23 @@
                             const activeMonth = activePoints[0]["_index"];
 
                             console.log(activeMonth);
-                            $.get('http://' + window.location.host + '/api/workload/' + activeMonth, function (datasource) {
+                            $.get('https://' + window.location.host + '/api/workload/' + activeMonth, function (datasource) {
                                 var dataitems = [];
                                 table.rows().remove().draw();
-                                
+
                                 $.each(datasource.data, function (i, item) {
                                     const data = [];
                                     data.push(item.id);
                                     data.push(datasource.month);
                                     data.push(item.jobs.length);
-                                    data.push(item.jobs.length*10);
+                                    data.push(item.jobs.length * 10);
                                     data.push(item.penaltySalary);
                                     dataitems.push(data);
-                                    
+
                                 });
                                 table.rows.add(dataitems).draw();
-                                
-                               
+
+
 
                             });
 

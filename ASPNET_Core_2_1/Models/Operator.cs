@@ -10,11 +10,7 @@ namespace ASPNET_Core_2_1.Models
             Jobs = new List<Job>();
             Penalties = new List<Penalty>();
         }
-        public Operator(int id)
-        {
-            id = Id;
-            Fired = false;
-        }
+      
 
         public int Id { get; set; }
         public int Month { get; set; }

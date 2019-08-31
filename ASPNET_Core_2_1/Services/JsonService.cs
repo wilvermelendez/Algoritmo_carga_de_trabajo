@@ -33,6 +33,7 @@ namespace ASPNET_Core_2_1.Services
         {
             try
             {
+                path = Path.GetDirectoryName(Path.GetFullPath("DatosGrafica.json")) + path;
                 var json = JsonConvert.SerializeObject(data.ToArray());
                 //write string to file
                 File.WriteAllText(path, string.Empty);

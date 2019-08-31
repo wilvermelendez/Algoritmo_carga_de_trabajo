@@ -15,7 +15,9 @@
             <li class="@Html.IsSelected(controller: "Home", action: "Main")">
                 <a href="@Url.Action("Main", "Home")"><i class="fa fa-diamond"></i> <span class="nav-label">Principal</span> <span class="label label-primary float-right">Principal</span></a>
             </li>
-            
+            <li class="@Html.IsSelected(controller: "Home", action: "Minor")">
+                <a href="@Url.Action("Minor", "Home")"><i class="fa fa-server"></i> <span class="nav-label">Reporte operarios</span></a>
+            </li>
         </ul>
     </div>
 </nav>

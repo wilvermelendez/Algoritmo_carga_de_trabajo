@@ -16,6 +16,11 @@ namespace ASPNET_Core_2_1
         private int index3;
         public int num;
         public int cont;
+        Operator obj1 = new Operator();
+        Operator obj5 = new Operator();
+        Operator obj3 = new Operator();
+
+   
         public Calificacion()
         {
 
@@ -26,21 +31,11 @@ namespace ASPNET_Core_2_1
         public void Calificar(List<Operator> Operario)
         {
 
-
-
-
-            /*
-            for (int j = 0; j < num; j++)
-            {
-                Operario.Add(j);
-            }
-            */
-
-
             //Clonando lista para usarla en division de operarios por calificación
             List<Operator> OperarioClon = new List<Operator>(Operario);
+            num = OperarioClon.Count;
 
-
+           
             //obtener el 2% de operarios que tendran calificacion de "1" aplicando round para evitar fraccion de operarios
             double cal1 = num * 0.02;
             Math.Round(cal1);
@@ -50,7 +45,7 @@ namespace ASPNET_Core_2_1
             Math.Round(cal2);
 
             //obtener los operarios que tendran calificacion de "4 ó 5"
-            double cal3 = num - cal1 - cal2;
+            double cal3 = num * 0.9;
 
 
             //tomando numero de operarios del 2% de forma random para ser un sistema justo
@@ -59,38 +54,49 @@ namespace ASPNET_Core_2_1
                 num = OperarioClon.Count;
                 Random r1 = new Random();
                 index = r1.Next(num);
-                //Creando un objeto de tipo operador para acceder a su lista de trabajos respectiva
-                Operator obj = new Operator(index);
+               
+                 
+                List<Jobs> lisop = new List<Jobs>();                                  //creando lista para almacenar los trabajos
 
-                //A partir del operador crear una lista de sus trabajos
-                List<Jobs> jbs = new List<Jobs>(obj.Trabajos);
-
-                //Contando la lista de trabajos
-                cont = jbs.Count;
-
-                /*Creación de un bucle que evalue los trabajos, cumpliendo que este operador por ser parte del 2% tendra que tener la calificación de "1" en uno de sus trabajos en este caso 
-                  en su primer trabajo, el algoritmo evalua si tiene nota de "1" en su primer trabajo si ese es el caso entonces toma la posicion Z que se esta evaluando y le asigna una nota
-                  random entre 1 y 5, en el caso que sea la primera vez q se evalue el bucle y el trabajador aun no tenga 1 de nota en su primer trabajo entonces se le agrega la calificación de "1" sino se asigna la nota
-                  entre "1 a 5" de manera random asi de esta forma si obtiene "1" por segunda vez, será por el algoritmo respetando que el operario este bajo un sistema justo*/
-                for (int z = 0; z < cont; z++)
+                foreach (Operator obj in Operario)                                     //for each para guardar todos los trabajos en la lista confirmando que pertencen al mismo id
                 {
-                    if (jbs[0].Score == 1)
+                    if (obj.Id == index)
                     {
-                        jbs[z].Score = r1.Next(1, 5);
+                        lisop = obj.Trabajos;
+                        cont = lisop.Count;                                           //contador de los trabajos del usuario en cuestion
 
+                        for (int z = 0; z < cont; z++)                               //codigo de evaluación de trabajos donde al primer ytrabajo se le asigna "1" y los demas una nota random de 1 a 5
+                        {
+                            if (lisop[0].Score == 1)
+                            {
+                                lisop[z].Score = r1.Next(1, 5);
+
+                            }
+                            else
+                            {
+                                lisop[0].Score = 1;
+                            }
+
+                        }
                     }
-                    else
-                    {
-                        jbs[0].Score = 1;
-                    }
+
+
+
                 }
 
-                //se remueve el operario de la lista que se copió de la lista de operadores para no evaluar sus trabajos nuevamente y se tome un operador que no ha sido evaluado
 
-                OperarioClon.RemoveAt(index);
+                foreach (Operator obj2 in OperarioClon)                                  //borrando objeto de la lista clon para no evaluarlo nuevamente
+                {
+                    if (obj2.Id == index)
+                    {
+                        obj1 = obj2;
+                    }
+                }
+                OperarioClon.Remove(obj1);
+             
 
+              
             }
-
             //tomando numero de operarios del 8% de forma random para ser un sistema justo
             for (int i = 0; i < cal2; i++)
             {
@@ -101,14 +107,16 @@ namespace ASPNET_Core_2_1
                 Random r2 = new Random();
                 index3 = r1.Next(2, 3);
 
-                //Creando un objeto de tipo operador para acceder a su lista de trabajos respectiva
-                Operator obj1 = new Operator(index2);
+                List<Jobs> lisop2 = new List<Jobs>();
 
-                //A partir del operador crear una lista de sus trabajos
-                List<Jobs> jbs1 = new List<Jobs>(obj1.Trabajos);
+                foreach (Operator obj in OperarioClon)
+                {
+                    obj.Id = index;
+                    lisop2 = obj.Trabajos;
+                }
 
                 //Contando la lista de trabajos
-                cont = jbs1.Count;
+                cont = lisop2.Count;
 
                 //Creando objetos operario con su respectiva calificación
 
@@ -116,14 +124,14 @@ namespace ASPNET_Core_2_1
                 {
                     for (int z = 0; z < cont; z++)
                     {
-                        if (jbs1[0].Score == 2)
+                        if (lisop2[0].Score == 2)
                         {
-                            jbs1[z].Score = r1.Next(2, 5);
+                            lisop2[z].Score = r1.Next(2, 5);
 
                         }
                         else
                         {
-                            jbs1[0].Score = 2;
+                            lisop2[0].Score = 2;
                         }
                     }
 
@@ -132,18 +140,27 @@ namespace ASPNET_Core_2_1
                 {
                     for (int z = 0; z < cont; z++)
                     {
-                        if (jbs1[0].Score == 3)
+                        if (lisop2[0].Score == 3)
                         {
-                            jbs1[z].Score = r1.Next(2, 5);
+                            lisop2[z].Score = r1.Next(2, 5);
 
                         }
                         else
                         {
-                            jbs1[0].Score = 3;
+                            lisop2[0].Score = 3;
                         }
                     }
                 }
-                OperarioClon.RemoveAt(index2);
+
+                foreach (Operator obj4 in OperarioClon)
+                {
+                    obj4.Id = index2;
+                    obj3 = obj4;
+                }
+
+
+                OperarioClon.Remove(obj3);
+                
 
             }
 
@@ -154,36 +171,46 @@ namespace ASPNET_Core_2_1
             {
                 num = OperarioClon.Count;
                 Random r1 = new Random();
-                index2 = r1.Next(num);
+                index = r1.Next(num);
 
-                //Creando un objeto de tipo operador para acceder a su lista de trabajos respectiva
-                Operator obj2 = new Operator(index2);
+                List<Jobs> lisop3 = new List<Jobs>();
 
-                //A partir del operador crear una lista de sus trabajos
-                List<Jobs> jbs2 = new List<Jobs>(obj2.Trabajos);
-
-                //Contando la lista de trabajos
-                cont = jbs2.Count;
-
-                //Creando objetos operario con su respectiva calificación
-                for (int z = 0; z < cont; z++)
+                foreach (Operator obj in OperarioClon)
                 {
-                    if (jbs2[0].Score == 5)
-                    {
-                        jbs2[z].Score = r1.Next(4, 5);
+                    obj.Id = index;
+                    lisop3 = obj.Trabajos;
+                    //Contando la lista de trabajos
+                    cont = lisop3.Count;
 
-                    }
-                    else
+                    //Creando objetos operario con su respectiva calificación
+                    for (int z = 0; z < cont; z++)
                     {
-                        jbs2[0].Score = 5;
+                        if (lisop3[0].Score == 5)
+                        {
+                            lisop3[z].Score = r1.Next(4, 5);
+
+                        }
+                        else
+                        {
+                            lisop3[0].Score = 5;
+                        }
                     }
                 }
 
-                OperarioClon.RemoveAt(index2);
+                foreach (Operator obj6 in OperarioClon)
+                {
+                    obj6.Id = index;
+                    obj5 = obj6;
+                }
+                OperarioClon.Remove(obj5);
+
+
+
+               
 
             }
 
-
+           
         }
     }
 }

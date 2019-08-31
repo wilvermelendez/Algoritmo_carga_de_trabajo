@@ -27,7 +27,7 @@ namespace ASPNET_Core_2_1.Controllers.Api
             return Ok(new { data});
         }
         [HttpPost]
-        public IActionResult SaveParameter(List<Parameter> parameter)
+        public IActionResult SaveParameter(Parameter parameter)
         {
             var data = ParameterService.SaveParameters(parameter);
             return Ok(new { success=data});

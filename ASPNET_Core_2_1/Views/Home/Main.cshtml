@@ -106,6 +106,7 @@
     </environment>
     <script type="text/javascript">
 
+        //Almacenando parametros
         function send() {
             var datosIniciales = {
                 porcentajeCapacidad: $("#porcentajeCapacidad").val(),
@@ -120,17 +121,20 @@
                 contentType: "application/json; charset=utf-8",
                 type: 'POST',
                 dataType: 'json',
+                data:  datosIniciales,
                 success: function (data) {
                     $('#target').html(data.msg);
-                },
-                data: datosIniciales
+                }
+                
             });
         }
         $(document).ready(function () {
+            //asignando elemento click para guardar parametros
             $("#calc").click(function () {
                 send();
             });
 
+            //creando tabla de datos
             var table = $('#data-table').DataTable({
                 data: [],
                 columns: [
@@ -163,7 +167,7 @@
             });
 
 
-
+            //obteniendo los datos para la gráfica
             $.get('https://' + window.location.host + '/api/demand', function (data) {
                 const lineData = {
                     labels: data.months,
@@ -189,16 +193,18 @@
 
                 const ctx = document.getElementById("lineChart").getContext("2d");
                 const myNewChart = new Chart(ctx, { type: 'line', data: lineData, options: lineOptions });
-
+                //cuando se le dé click a la grafica se ejecuta la acción
                 $("#lineChart").click(
                     function (evt) {
                         const activePoints = myNewChart.getElementsAtEvent(evt);
+                        //si el click es un punto de la grafica se carga la tabla de los operadores por el mes
                         if (activePoints[0] != undefined) {
                             const activeMonth = activePoints[0]["_index"];
 
-                            console.log(activeMonth);
+                            //Request para obtener la lista de datos acorde al mes seleccionado 
                             $.get('https://' + window.location.host + '/api/workload/' + activeMonth, function (datasource) {
                                 var dataitems = [];
+                                //vaciar y llenar tabla de datos
                                 table.rows().remove().draw();
 
                                 $.each(datasource.data, function (i, item) {
@@ -209,10 +215,8 @@
                                     data.push(item.jobs.length * 10);
                                     data.push(item.penaltySalary);
                                     dataitems.push(data);
-
                                 });
                                 table.rows.add(dataitems).draw();
-
 
 
                             });

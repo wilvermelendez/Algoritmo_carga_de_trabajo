@@ -7,6 +7,7 @@ using ASPNET_Core_2_1.Services;
 using Microsoft.AspNetCore.Http;
 using ASPNET_Core_2_1.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
 
 namespace ASPNET_Core_2_1.Controllers.Api
 {
@@ -26,7 +27,7 @@ namespace ASPNET_Core_2_1.Controllers.Api
             return Ok(new { data});
         }
         [HttpPost]
-        public IActionResult SaveParameter(Parameter parameter)
+        public IActionResult SaveParameter(List<Parameter> parameter)
         {
             var data = ParameterService.SaveParameters(parameter);
             return Ok(new { success=data});

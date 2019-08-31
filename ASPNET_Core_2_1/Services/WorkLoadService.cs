@@ -1,6 +1,7 @@
 ﻿using ASPNET_Core_2_1.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace ASPNET_Core_2_1.Services
 {
@@ -70,15 +71,12 @@ namespace ASPNET_Core_2_1.Services
             return workLoad;
         }
 
-        public List<WorkLoad> GetWorkLoads()
-        {
-            return null;
-        }
+        public List<WorkLoad> GetWorkLoads() => JsonService.LoadJson<WorkLoad>($"{Path.GetDirectoryName(System.IO.Path.GetFullPath("WorkLoad.json"))}/Data/WorkLoad.json");
 
-        public bool SaveWorkLoad()
+        public bool SaveWorkLoad(List<WorkLoad> workLoads)
         {
+            JsonService.SaveJson<WorkLoad>(workLoads, $"{Path.GetDirectoryName(System.IO.Path.GetFullPath("DatosGrafica.json"))}/Data/WorkLoad.json");
             return true;
-
         }
 
 

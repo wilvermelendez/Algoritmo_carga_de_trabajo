@@ -11,5 +11,6 @@ namespace ASPNET_Core_2_1.Models
         public int HoursPerJobs { get; set; }
         public int PricePerJob { get; set; }
         public int Percentage { get; set; }
+
     }
 }

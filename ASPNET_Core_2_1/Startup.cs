@@ -62,8 +62,8 @@ namespace ASPNET_Core_2_1
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Main}/{id?}");
+                    "default",
+                    "{controller=Home}/{action=Main}/{id?}");
             });
             app.UseCors(options => options.AllowAnyOrigin());
         }

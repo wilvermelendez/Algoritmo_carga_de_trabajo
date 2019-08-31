@@ -19,7 +19,7 @@ namespace ASPNET_Core_2_1.Controllers
         {
             //run algorithms
             var data = WorkLoadService.GenerateWorkLoads();
-            JsonService.SaveJson<WorkLoad>(data, $"{Path.GetDirectoryName(System.IO.Path.GetFullPath("DatosGrafica.json"))}/Data/WorkLoad.json");
+            WorkLoadService.SaveWorkLoad(data);
             return View();
         }
 

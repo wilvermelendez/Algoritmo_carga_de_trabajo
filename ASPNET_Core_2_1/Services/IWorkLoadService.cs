@@ -9,6 +9,6 @@ namespace ASPNET_Core_2_1.Services
         IDemandService DemandService { get; set; }
         List<WorkLoad> GenerateWorkLoads();
         List<WorkLoad> GetWorkLoads();
-        bool SaveWorkLoad();
+        bool SaveWorkLoad(List<WorkLoad> workLoads);
     }
 }
